@@ -7,7 +7,7 @@ from sly import Lexer
 from sly import Parser
 import sys
 
-from globals import modify_global_consts_address, program_lines, global_command_lineno, modify_global_command_lineno
+from globals import modify_global_consts_address, program_lines, modify_global_command_lineno
 
 
 # Lexer class for tokenizing the input
@@ -199,7 +199,7 @@ class ImperativeParser(Parser):
 
     @_('declarations "," PID', 'PID')
     def declarations(self, p):
-        # Checking first if the parsing the main program or a procedure
+        # Checking first if parsing the main program or a procedure
         # Parsing a procedure
         modify_global_command_lineno(p.lineno)
         if len(self.symbols) < len(self.procedure_symbols):

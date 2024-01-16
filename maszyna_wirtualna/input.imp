@@ -1,41 +1,40 @@
-# ? 0
-# ? 1
-# > 46368
-# > 28657
+# Kombinacje
+# ? 20
+# ? 9
+# > 167960
 
-PROCEDURE pa(a,b) IS
+PROCEDURE s(n,m) IS
+    i,o
 IN
-  a:=a+b;
-  b:=a-b;
+    m:=1;
+    i:=n;
+    WHILE i>0 DO
+        o:=i%2;
+        IF o=1 THEN
+            m:=m*i;
+        ELSE
+            m:=i*m;
+        ENDIF
+        i:=i-1;
+    ENDWHILE
 END
 
-PROCEDURE pb(a,b) IS
+PROCEDURE bc(n,k,m) IS
+   p,a,b,c
 IN
-  pa(a,b);
-  pa(a,b);
-END
-
-PROCEDURE pc(a,b) IS
-IN
-  pb(a,b);
-  pb(a,b);
-  pb(a,b);
-END
-
-PROCEDURE pd(a,b) IS
-IN
-  pc(a,b);
-  pc(a,b);
-  pc(a,b);
-  pc(a,b);
+   s(n,a);
+   p:=n-k;
+   s(p,b);
+   s(k,c);
+   m:=a/b;
+   m:=m/c;
 END
 
 PROGRAM IS
-  a,b
+    n,k,w
 IN
-  READ a;
-  READ b;
-  pd(a,b);
-  WRITE a;
-  WRITE b;
+    READ n;
+    READ k;
+    bc(n,k,w);
+    WRITE w;
 END

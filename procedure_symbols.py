@@ -10,14 +10,11 @@ class ProcedureArray:
     def __repr__(self):
         return f"[{self.memory_offset}, {self.size}]"
 
-    def change_address(self, address):
-        self.memory_offset = address
-
     def get_at(self, index):
         if 0 <= index < self.size:
             return self.memory_offset + index
         else:
-            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size} (line {get_global_command_lineno})!")
+            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size} (line {get_global_command_lineno()})!")
 
 
 class ProcedureArgsArray:
@@ -33,7 +30,7 @@ class ProcedureArgsArray:
         if 0 <= index < self.size:
             return self.memory_offset + index
         else:
-            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size} (line {get_global_command_lineno})!")
+            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size} (line {get_global_command_lineno()})!")
 
     def set_array_address_and_size(self, address, size):
         self.memory_offset = address
@@ -46,10 +43,7 @@ class ProcedureVariable:
         self.initialized = False
 
     def __repr__(self):
-        return f"{'Uni' if not self.initialized else 'I'}nitialized procedure variable at {self.memory_offset} (line {get_global_command_lineno()})!"
-
-    def change_address(self, address):
-        self.memory_offset = address
+        return f"{'Uni' if not self.initialized else 'I'}nitialized procedure variable at {self.memory_offset}"
 
 
 class ProcedureArgsVariable:
@@ -58,7 +52,7 @@ class ProcedureArgsVariable:
         self.initialized = False
 
     def __repr__(self):
-        return f"{'Uni' if not self.initialized else 'I'}nitialized procedure argument variable at {self.memory_offset} (line {get_global_command_lineno()})!"
+        return f"{'Uni' if not self.initialized else 'I'}nitialized procedure argument variable at {self.memory_offset}"
 
     def set_var_address(self, address):
         self.memory_offset = address
@@ -74,17 +68,8 @@ class ProcedureSymbols(dict):
         self.args = []
         self.consts = {}
 
-    #def set_memory_offset(self, memory_offset):
-    #    self.memory_offset = memory_offset
-
-    def get_memory_offset(self):
-        return self.memory_offset
-
     def set_procedure_name(self, name):
         self.name = name
-
-    def get_procedure_name(self):
-        return self.name
 
     def add_variable(self, name, offset=0):
         if name in self:

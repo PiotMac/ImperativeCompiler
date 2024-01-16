@@ -14,7 +14,7 @@ class Array:
         if 0 <= index < self.size:
             return self.memory_offset + index
         else:
-            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size} (line {get_global_command_lineno()})!")
+            raise Exception(f"Index {index} out of range for array {self.name} of size {self.size}")
 
 
 class Variable:
@@ -23,7 +23,7 @@ class Variable:
         self.initialized = False
 
     def __repr__(self):
-        return f"{'Uni' if not self.initialized else 'I'}nitialized variable at {self.memory_offset} (line {get_global_command_lineno()})!"
+        return f"{'Uni' if not self.initialized else 'I'}nitialized variable at {self.memory_offset}"
 
 
 class ProgramSymbols(dict):

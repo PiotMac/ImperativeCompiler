@@ -1,40 +1,60 @@
-# Kombinacje
-# ? 20
-# ? 9
-# > 167960
+# sortowanie
 
-PROCEDURE s(n,m) IS
-    i,o
+PROCEDURE shuffle(T t, n) IS
+  i, q, w
 IN
-    m:=1;
-    i:=n;
-    WHILE i>0 DO
-        o:=i%2;
-        IF o=1 THEN
-            m:=m*i;
-        ELSE
-            m:=i*m;
-        ENDIF
-        i:=i-1;
-    ENDWHILE
+  q:=5;
+  w:=1;
+  i:=0;
+  WHILE i<n DO
+    w:=w*q;
+    w:=w%n;
+    t[i]:=w;
+    i:=i+1;
+  ENDWHILE
+  i:=n-1;
+  t[i]:=0;
 END
 
-PROCEDURE bc(n,k,m) IS
-   p,a,b,c
+PROCEDURE sort(T t, n) IS
+  x, i, j, k
 IN
-   s(n,a);
-   p:=n-k;
-   s(p,b);
-   s(k,c);
-   m:=a/b;
-   m:=m/c;
+  i:=1;
+  WHILE i<n DO
+    x:=t[i];
+    j:=i;
+    WHILE j>0 DO
+      k:=j-1;
+      IF t[k]>x THEN
+        t[j]:=t[k];
+        j:=j-1;
+      ELSE
+        k:=j;
+        j:=0;
+      ENDIF
+    ENDWHILE
+    t[k]:=x;
+    i:=i+1;
+  ENDWHILE
+END
+
+PROCEDURE write(T t, n) IS
+  i
+IN
+  i:=0;
+  WHILE i<n DO
+    WRITE t[i];
+    i:=i+1;
+  ENDWHILE
 END
 
 PROGRAM IS
-    n,k,w
+  t[23], n
 IN
-    READ n;
-    READ k;
-    bc(n,k,w);
-    WRITE w;
+  n:=23;
+  shuffle(t,n);
+  write(t,n);
+  WRITE 1234567890;
+  sort(t,n);
+  write(t,n);
 END

@@ -1,7 +1,7 @@
 from symbols import Variable, Array
 from procedure_symbols import ProcedureVariable, ProcedureArgsVariable, ProcedureArray, ProcedureArgsArray
 
-from globals import modify_global_consts_address, program_lines, get_global_command_lineno, modify_global_command_lineno
+from globals import modify_global_consts_address, program_lines, get_global_command_lineno, modify_global_command_lineno, get_global_consts_address
 
 
 # Class responsible for translating the commands into assembly code
@@ -29,7 +29,6 @@ class Encoder:
             self.create_assembly_code_from_commands(self.commands)
             self.symbols.end_address = len(self.code)
         else:
-            modify_global_consts_address(self.symbols.memory_offset + 1)
             self.create_assembly_code_from_commands(self.commands)
             self.code.append("HALT")
 
@@ -473,7 +472,7 @@ class Encoder:
                 self.code.append(f"RST {target_reg}")
                 self.code.append(f"GET {third_reg}")
                 k = len(self.code) + self.code_offset
-                self.code.append(f"JZERO {k + 34}")
+                self.code.append(f"JZERO {k + 35}")
 
                 # Check if third is odd (using shifts)
                 self.code.append(f"PUT {fifth_reg}")
@@ -502,7 +501,7 @@ class Encoder:
                 self.code.append(f"RST {target_reg}")
                 self.code.append(f"GET {second_reg}")
                 k = len(self.code) + self.code_offset
-                self.code.append(f"JZERO {k + 16}")
+                self.code.append(f"JZERO {k + 17}")
 
                 # Check if second is odd (using shifts)
                 self.code.append(f"PUT {fifth_reg}")
@@ -525,6 +524,8 @@ class Encoder:
                 self.code.append(f"RST a")
                 k = len(self.code) + self.code_offset
                 self.code.append(f"JUMP {k - 16}")
+                # If there was multiplication by zero
+                self.code.append(f"RST {target_reg}")
 
             # Dividing two numbers
             elif expression[0] == "div":

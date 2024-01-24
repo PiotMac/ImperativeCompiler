@@ -122,7 +122,7 @@ class ImperativeParser(Parser):
     def main(self, p):
         modify_global_command_lineno(p.lineno)
         self.code = Encoder(p.commands, self.symbols, self.whole_code, False, p.lineno)
-        modify_global_consts_address(self.symbols.memory_offset + 1)
+        modify_global_consts_address(self.symbols.memory_offset + self.all_procedures_symbols[-1].memory_offset)
         self.whole_code.append(self.code)
 
         return self.code

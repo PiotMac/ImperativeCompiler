@@ -79,7 +79,7 @@ class ProcedureSymbols(dict):
 
     def add_args_variable(self, name):
         self.setdefault(name, ProcedureArgsVariable())
-        self.args += name
+        self.args.append(name)
 
     def set_args_variable_address(self, index, address):
         self.get_variable(self.args[index]).set_var_address(address)
@@ -87,7 +87,7 @@ class ProcedureSymbols(dict):
 
     def add_args_array(self, name):
         self.setdefault(name, ProcedureArgsArray(name))
-        self.args += name
+        self.args.append(name)
 
     def set_args_array_address_and_size(self, index, address, size):
         x = self.args[index]

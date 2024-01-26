@@ -1,60 +1,38 @@
-# sortowanie
+# a ^ b mod c
+# ? 1234567890
+# ? 1234567890987654321
+# ? 987654321
+# > 674106858
 
-PROCEDURE shuffle(T t, n) IS
-  i, q, w
+PROCEDURE ec_add(ax, ay, bx, by, a, b, p) IS
+    zca, zcb, lambda, compute
 IN
-  q:=5;
-  w:=1;
-  i:=0;
-  WHILE i<n DO
-    w:=w*q;
-    w:=w%n;
-    t[i]:=w;
-    i:=i+1;
-  ENDWHILE
-  i:=n-1;
-  t[i]:=0;
-END
-
-PROCEDURE sort(T t, n) IS
-  x, i, j, k
-IN
-  i:=1;
-  WHILE i<n DO
-    x:=t[i];
-    j:=i;
-    WHILE j>0 DO
-      k:=j-1;
-      IF t[k]>x THEN
-        t[j]:=t[k];
-        j:=j-1;
-      ELSE
-        k:=j;
-        j:=0;
-      ENDIF
-    ENDWHILE
-    t[k]:=x;
-    i:=i+1;
-  ENDWHILE
-END
-
-PROCEDURE write(T t, n) IS
-  i
-IN
-  i:=0;
-  WHILE i<n DO
-    WRITE t[i];
-    i:=i+1;
-  ENDWHILE
+    WRITE ax;
+    WRITE ay;
+    WRITE bx;
+    WRITE by;
+    WRITE a;
+    WRITE b;
+    WRITE p;
 END
 
 PROGRAM IS
-  t[23], n
+   rax, ray, rbx, rby, a, b, p, bit
 IN
-  n:=23;
-  shuffle(t,n);
-  write(t,n);
-  WRITE 1234567890;
-  sort(t,n);
-  write(t,n);
+   rax:=1;
+   ray:=2;
+   rbx:=3;
+   rby:=4;
+   a:=5;
+   b:=6;
+   p:=7;
+   bit:=0;
+   IF bit = 0 THEN
+        ec_add(rbx, rby, rax, ray, a, b, p);
+        ec_add(rax, ray, rax, ray, a, b, p);
+   ELSE
+        ec_add(rax, ray, rbx, rby, a, b, p);
+        ec_add(rbx, rby, rbx, rby, a, b, p);
+   ENDIF
+   WRITE 5;
 END

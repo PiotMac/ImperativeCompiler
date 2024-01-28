@@ -185,8 +185,11 @@ class Encoder:
                 command[3] - constants
                 """
                 lines_scope = self.find_lines_scope('WHILE')
+                if lines_scope is None:
+                    self.find_command_lineno("WHILE")
+                else:
+                    modify_global_command_lineno(lines_scope[0])
                 self.is_in_loop = True
-                modify_global_command_lineno(lines_scope[0])
                 condition = self.simplify_condition(command[1])
                 if isinstance(condition, bool):
                     # If condition is met, do commands inside while and come back
@@ -215,8 +218,11 @@ class Encoder:
                 command[2] - commands inside 'repeat'
                 """
                 lines_scope = self.find_lines_scope('REPEAT')
+                if lines_scope is None:
+                    self.find_command_lineno("REPEAT")
+                else:
+                    modify_global_command_lineno(lines_scope[0])
                 self.is_in_loop = True
-                modify_global_command_lineno(lines_scope[0])
                 loop_start = len(self.code) + self.code_offset
                 self.create_assembly_code_from_commands(command[2])
                 condition_start = len(self.code) + self.code_offset

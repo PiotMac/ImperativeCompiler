@@ -2,7 +2,7 @@
 #
 # The calculator has 4 internal registers, each containing an elliptic curve point
 # By default the content of the registers is undefined.
-#
+# 
 # Supported operations: (op)
 #  0 - Load G into register [operand = reg dst]
 #  1 - Load custom (x, y) into register [operands = reg dst, x, y]
@@ -13,7 +13,7 @@
 #  10 - Add points on curve [operands = reg src1dst, reg src2]
 #  12 - Multiply point by scalar [operands = reg srcdst, scalar]
 #  999 - exit
-#
+# 
 # Usage:
 # ? [p]
 # ? [q]
@@ -134,7 +134,7 @@ IN
   zca := zca * zcb;
   IF zca = 0 THEN
     ax := ax + bx; ay := ay + by; # return either (ax, ay) or (bx, by) w/e's not 0
-  ELSE
+  ELSE 
     IF ax = bx THEN  # point doubling or complementary
       IF ay = by THEN  # point doubling
         compute := 1;

@@ -6,6 +6,7 @@ from encoder import Encoder
 from sly import Lexer
 from sly import Parser
 import sys
+import ast
 
 from globals import modify_global_consts_address, program_lines, modify_global_command_lineno
 
@@ -42,6 +43,7 @@ class ImperativeLexer(Lexer):
     THEN = r'THEN'
     ELSE = r'ELSE'
     WHILE = r'WHILE'
+
     REPEAT = r'REPEAT'
     UNTIL = r'UNTIL'
     READ = r'READ'
@@ -379,6 +381,7 @@ if __name__ == '__main__':
         if current_line != tok.lineno:
             current_line = tok.lineno
             program_lines.append((tok.type, tok.lineno))  # Append a tuple with token type and line number
+
 
     parser = ImperativeParser()
 
